@@ -1,4 +1,4 @@
-]function createStars() {
+function createStars() {
   const starsContainer = document.querySelector('.snow-container');
   const numberOfStars = 100;
 
