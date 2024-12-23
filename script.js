@@ -1,4 +1,4 @@
-function createStars() {
+]function createStars() {
   const starsContainer = document.querySelector('.snow-container');
   const numberOfStars = 100;
 
@@ -72,14 +72,23 @@ setInterval(createSnow, 200);
 const musicBtn = document.querySelector('.music-toggle');
 const audio = document.getElementById('bgMusic');
 
+// Hàm cập nhật biểu tượng nút âm nhạc
+function updateMusicButton() {
+  if (audio.paused) {
+    musicBtn.textContent = '🔈'; // Âm nhạc tắt
+  } else {
+    musicBtn.textContent = '🔊'; // Âm nhạc bật
+  }
+}
+
+// Thêm sự kiện click vào nút âm nhạc
 musicBtn.addEventListener('click', () => {
   if (audio.paused) {
     audio.play();
-    musicBtn.textContent = '🔊';
   } else {
     audio.pause();
-    musicBtn.textContent = '🔈';
   }
+  updateMusicButton();
 });
 
 // Thêm hiệu ứng di chuyển cho ông già Noel
@@ -442,4 +451,15 @@ document.addEventListener('DOMContentLoaded', () => {
       createMouseParticle(e);
     }
   });
+  audio
+    .play()
+    .then(() => {
+      // Nếu âm nhạc được phát thành công, cập nhật biểu tượng nút âm nhạ
+      updateMusicButton();
+    })
+    .catch((error) => {
+      // Nếu autoplay bị chặn, thông báo lỗi và cập nhật biểu tượng nút âm nhạc
+      console.log('Autoplay was prevented:', error);
+      updateMusicButton();
+    });
 });
